@@ -183,7 +183,7 @@
 
                                 <div class="tab-pane" id="tab_steps">
 
-                            <?php echo $__env->make('Core::admin/seo-meta/seo-meta', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                            <?php echo $__env->make('Tour::admin/tour/plans-steps', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
                             </div>
 

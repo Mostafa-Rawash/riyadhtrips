@@ -184,7 +184,7 @@
 
                                 <div class="tab-pane" id="tab_steps">
 
-                            @include('Core::admin/seo-meta/seo-meta')
+                            @include('Tour::admin/tour/plans-steps')
 
                             </div>
 
