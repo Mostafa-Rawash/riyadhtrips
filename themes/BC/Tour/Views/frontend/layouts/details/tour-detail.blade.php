@@ -107,6 +107,7 @@
         </div>
     </div>
 @endif
+@include('Tour::frontend.layouts.details.tour-plans-steps')
 @include('Tour::frontend.layouts.details.tour-include-exclude')
 @include('Tour::frontend.layouts.details.tour-itinerary')
 @include('Tour::frontend.layouts.details.tour-attributes')

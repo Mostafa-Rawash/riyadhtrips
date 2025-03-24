@@ -1,33 +1,26 @@
 @php
 // Initialize default plans structure
 $defaultPlans = [
-    [
-        'name' => 'Day 1',
-        'steps' => [
-            ['title' => 'Morning Activity', 'description' => 'Description', 'image' => ''],
-            ['title' => 'Afternoon Activity', 'description' => 'Description', 'image' => '']
+    "0" => [
+        "name" => "ssssss",
+        "steps" => [
+            ["title" => "asasa", "description" => "sasas", "image" => null]
         ]
     ],
-    [
-        'name' => 'Day 2',
-        'steps' => [
-            ['title' => 'Full Day Activity', 'description' => 'Description', 'image' => '']
-            ]
-        ]
-    ];
+    "1" => ["name" => "ggggg"]
+];
 
 // Use existing plans or default
-$plans = [];
-if (!empty($translation->plans)) {
-    if (is_array($translation->plans)) {
-        $plans = $translation->plans;
-    } else {
-        $plans = json_decode($translation->plans, true) ?: json_decode(old('plans', $translation->plans), true);
-    }
+$plans = $translation->plans;
+if (!is_array($translation->plans)) {
+    $plans = json_decode(old('plans', default: $translation->plans), true);
 }
 if (empty($plans)) {
     $plans = $defaultPlans;
     $translation->plans = $defaultPlans;
+}
+if(isset($plans['__plan_number__'])){
+    unset($plans['__plan_number__']);
 }
 @endphp
 
@@ -53,8 +46,8 @@ if (empty($plans)) {
                         <input type="text"
                             name="plans[{{$plan_key}}][name]"
                             class="form-control"
-                            value="{{$plan->name ?? ''}}"
-                            placeholder="{{__('Enter Plan Name')}}">
+                            value="{{$plan['name'] ?? ''}}"
+                            placeholder="{{ $plan['name'] ?? __('Enter Plan Name')}}">
                     </div>
                     <div class="col-md-1 text-right">
                         <button type="button" class="btn btn-danger btn-sm btn-remove-plan">
@@ -69,9 +62,8 @@ if (empty($plans)) {
                     {{-- Steps Header --}}
                     <div class="g-items-header bg-light rounded p-2 mb-3">
                         <div class="row">
-                            <div class="col-md-3">{{__("Title")}}</div>
-                            <div class="col-md-4">{{__("Description")}}</div>
-                            <div class="col-md-3">{{__("Image")}}</div>
+                            <div class="col-md-4">{{__("Title")}}</div>
+                            <div class="col-md-6">{{__("Description")}}</div>
                             <div class="col-md-1">{{__("Actions")}}</div>
                         </div>
                     </div>
@@ -82,37 +74,18 @@ if (empty($plans)) {
                         @foreach($plan['steps'] as $step_key => $step)
                         <div class="item border-bottom py-2" data-number="{{$step_key}}">
                             <div class="row align-items-center">
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <input type="text"
                                         name="plans[{{$plan_key}}][steps][{{$step_key}}][title]"
                                         class="form-control"
                                         value="{{$step['title'] ?? ''}}"
                                         placeholder="{{__('Enter title')}}">
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <textarea name="plans[{{$plan_key}}][steps][{{$step_key}}][description]"
                                         class="form-control"
                                         rows="2"
                                         placeholder="{{__('Enter description')}}">{{$step['description'] ?? ''}}</textarea>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="input-group">
-                                        <input type="file"
-                                            name="plans[{{$plan_key}}][steps][{{$step_key}}][image]"
-                                            class="form-control step-image-input">
-                                        @if(!empty($step['image']))
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">
-                                                <a href="{{$step['image']}}" target="_blank">
-                                                    <i class="fa fa-image"></i>
-                                                </a>
-                                            </span>
-                                        </div>
-                                        <input type="hidden"
-                                            name="plans[{{$plan_key}}][steps][{{$step_key}}][image_current]"
-                                            value="{{$step['image']}}">
-                                        @endif
-                                    </div>
                                 </div>
                                 <div class="col-md-1 text-right">
                                     <button type="button" class="btn btn-danger btn-sm btn-remove-step">
@@ -160,9 +133,8 @@ if (empty($plans)) {
                 <div class="steps-wrapper">
                     <div class="g-items-header bg-light rounded p-2 mb-3">
                         <div class="row">
-                            <div class="col-md-3">{{__("Title")}}</div>
-                            <div class="col-md-4">{{__("Description")}}</div>
-                            <div class="col-md-3">{{__("Image")}}</div>
+                            <div class="col-md-4">{{__("Title")}}</div>
+                            <div class="col-md-6">{{__("Description")}}</div>
                             <div class="col-md-1">{{__("Actions")}}</div>
                         </div>
                     </div>
@@ -182,14 +154,11 @@ if (empty($plans)) {
     <div class="step-template">
         <div class="item border-bottom py-2" data-number="__step_number__">
             <div class="row align-items-center">
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <input type="text" name="plans[__plan_number__][steps][__step_number__][title]" class="form-control" placeholder="{{__('Enter title')}}">
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <textarea name="plans[__plan_number__][steps][__step_number__][description]" class="form-control" rows="2" placeholder="{{__('Enter description')}}"></textarea>
-                </div>
-                <div class="col-md-3">
-                    <input type="file" name="plans[__plan_number__][steps][__step_number__][image]" class="form-control step-image-input">
                 </div>
                 <div class="col-md-1 text-right">
                     <button type="button" class="btn btn-danger btn-sm btn-remove-step">
@@ -200,42 +169,6 @@ if (empty($plans)) {
         </div>
     </div>
 </div>
-
-@push('css')
-<style>
-    .plans-container {
-        margin-bottom: 30px;
-    }
-
-    .form-control {
-        border: 1px solid #ddd;
-    }
-
-    .card {
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
-    }
-
-    .card-header {
-        border-bottom: 1px solid #eee;
-    }
-
-    .item:last-child {
-        border-bottom: none !important;
-    }
-
-    textarea.form-control {
-        min-height: 45px;
-    }
-
-    .btn-sm {
-        padding: 0.25rem 0.5rem;
-    }
-
-    .step-image-input {
-        height: auto;
-    }
-</style>
-@endpush
 
 @push('js')
 <script>
