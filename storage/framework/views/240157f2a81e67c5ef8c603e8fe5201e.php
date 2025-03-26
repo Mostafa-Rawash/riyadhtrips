@@ -12,8 +12,11 @@
             <?php $__currentLoopData = $translation->include; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key=>$include): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <div class="item" data-number="<?php echo e($key); ?>">
                     <div class="row">
-                        <div class="col-md-11">
+                        <div class="col-md-5">
                             <input type="text" name="include[<?php echo e($key); ?>][title]" class="form-control" value="<?php echo e($include['title'] ?? ""); ?>" placeholder="<?php echo e(__('Eg: Specialized bilingual guide')); ?>">
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" name="include[<?php echo e($key); ?>][description]" class="form-control" value="<?php echo e($include['description'] ?? ""); ?>" placeholder="<?php echo e(__('Eg: Specialized bilingual guide description')); ?>">
                         </div>
                         <div class="col-md-1">
                                 <span class="btn btn-danger btn-sm btn-remove-item"><i class="fa fa-trash"></i></span>
@@ -29,8 +32,11 @@
     <div class="g-more hide">
         <div class="item" data-number="__number__">
             <div class="row">
-                <div class="col-md-11">
+                <div class="col-md-5">
                     <input type="text" __name__="include[__number__][title]" class="form-control" placeholder="<?php echo e(__('Eg: Specialized bilingual guide')); ?>">
+                </div>
+                <div class="col-md-6">
+                    <input type="text" __name__="include[__number__][description]" class="form-control" placeholder="<?php echo e(__('Eg: Specialized bilingual guide description')); ?>">
                 </div>
                 <div class="col-md-1">
                     <span class="btn btn-danger btn-sm btn-remove-item"><i class="fa fa-trash"></i></span>
@@ -53,8 +59,11 @@
             <?php $__currentLoopData = $translation->exclude; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key=>$exclude): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <div class="item" data-number="<?php echo e($key); ?>">
                     <div class="row">
-                        <div class="col-md-11">
+                        <div class="col-md-5">
                             <input type="text" name="exclude[<?php echo e($key); ?>][title]" class="form-control" value="<?php echo e($exclude['title'] ?? ""); ?>" placeholder="<?php echo e(__('Eg: Specialized bilingual guide')); ?>">
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" name="exclude[<?php echo e($key); ?>][description]" class="form-control" value="<?php echo e($exclude['description'] ?? ""); ?>" placeholder="<?php echo e(__('Eg: Specialized bilingual guide description')); ?>">
                         </div>
                         <div class="col-md-1">
                                 <span class="btn btn-danger btn-sm btn-remove-item"><i class="fa fa-trash"></i></span>
@@ -72,6 +81,9 @@
             <div class="row">
                 <div class="col-md-11">
                     <input type="text" __name__="exclude[__number__][title]" class="form-control" placeholder="<?php echo e(__('Eg: Additional Services')); ?>">
+                </div>
+                <div class="col-md-11">
+                    <input type="text" __name__="exclude[__number__][description]" class="form-control" placeholder="<?php echo e(__('Eg: Additional Services description')); ?>">
                 </div>
                 <div class="col-md-1">
                     <span class="btn btn-danger btn-sm btn-remove-item"><i class="fa fa-trash"></i></span>

@@ -63,8 +63,10 @@ if(isset($plans['__plan_number__'])){
                     
                     <div class="g-items-header bg-light rounded p-2 mb-3">
                         <div class="row">
+                            <div class="col-md-2"><?php echo e(__("Day")); ?></div>
                             <div class="col-md-4"><?php echo e(__("Title")); ?></div>
-                            <div class="col-md-6"><?php echo e(__("Description")); ?></div>
+                            <div class="col-md-4"><?php echo e(__("Description")); ?></div>
+                            <div class="col-md-1"><?php echo e(__("Image URL")); ?></div>
                             <div class="col-md-1"><?php echo e(__("Actions")); ?></div>
                         </div>
                     </div>
@@ -75,6 +77,13 @@ if(isset($plans['__plan_number__'])){
                         <?php $__currentLoopData = $plan['steps']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $step_key => $step): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <div class="item border-bottom py-2" data-number="<?php echo e($step_key); ?>">
                             <div class="row align-items-center">
+                            <div class="col-md-2">
+                                    <input type="text"
+                                        name="plans[<?php echo e($plan_key); ?>][steps][<?php echo e($step_key); ?>][day]"
+                                        class="form-control"
+                                        value="<?php echo e($step['day'] ?? ''); ?>"
+                                        placeholder="<?php echo e(__('Enter day')); ?>">
+                                </div>
                                 <div class="col-md-4">
                                     <input type="text"
                                         name="plans[<?php echo e($plan_key); ?>][steps][<?php echo e($step_key); ?>][title]"
@@ -82,13 +91,20 @@ if(isset($plans['__plan_number__'])){
                                         value="<?php echo e($step['title'] ?? ''); ?>"
                                         placeholder="<?php echo e(__('Enter title')); ?>">
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <textarea name="plans[<?php echo e($plan_key); ?>][steps][<?php echo e($step_key); ?>][description]"
                                         class="form-control"
                                         rows="2"
                                         placeholder="<?php echo e(__('Enter description')); ?>"><?php echo e($step['description'] ?? ''); ?></textarea>
                                 </div>
-                                <div class="col-md-1 text-right">
+                                <div class="col-md-1">
+                                    <input type="text"
+                                        name="plans[<?php echo e($plan_key); ?>][steps][<?php echo e($step_key); ?>][image_url]"
+                                        class="form-control"
+                                        value="<?php echo e($step['image_url'] ?? ''); ?>"
+                                        placeholder="<?php echo e(__('Enter image URL')); ?>">
+                                </div>
+                                <div class="col-md-1 text-center">
                                     <button type="button" class="btn btn-danger btn-sm btn-remove-step">
                                         <i class="fa fa-trash"></i>
                                     </button>
@@ -138,6 +154,8 @@ if(isset($plans['__plan_number__'])){
                             <div class="col-md-4"><?php echo e(__("Title")); ?></div>
                             <div class="col-md-6"><?php echo e(__("Description")); ?></div>
                             <div class="col-md-1"><?php echo e(__("Actions")); ?></div>
+                            <div class="col-md-1"><?php echo e(__("Day")); ?></div>
+                            <div class="col-md-1"><?php echo e(__("Image URL")); ?></div>
                         </div>
                     </div>
                     <div class="g-items"></div>
@@ -167,6 +185,12 @@ if(isset($plans['__plan_number__'])){
                     <button type="button" class="btn btn-danger btn-sm btn-remove-step">
                         <i class="fa fa-trash"></i>
                     </button>
+                </div>
+                <div class="col-md-1">
+                    <input type="number" name="plans[__plan_number__][steps][__step_number__][day]" class="form-control" placeholder="<?php echo e(__('Enter day')); ?>">
+                </div>
+                <div class="col-md-1">
+                    <input type="text" name="plans[__plan_number__][steps][__step_number__][image_url]" class="form-control" placeholder="<?php echo e(__('Enter image URL')); ?>">
                 </div>
             </div>
         </div>
