@@ -18,7 +18,11 @@
                     </div>
                     <div class="col-md-12 col-lg-4">
                         <?php echo $__env->make('Tour::frontend.layouts.details.vendor', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                        <?php if($row->category_id  == 9): ?>
+                            <?php echo $__env->make('Tour::frontend.layouts.details.tour-package-form-book', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                        <?php elseif($row->category_id  != 9): ?>
                         <?php echo $__env->make('Tour::frontend.layouts.details.tour-form-book', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                        <?php endif; ?>
                         <?php echo $__env->make('Tour::frontend.layouts.details.open-hours', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                     </div>
                 </div>

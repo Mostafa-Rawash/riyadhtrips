@@ -2,6 +2,8 @@
  if (!empty($translation->plans)) {
     $title = __("Sample Itinerary");
  }
+ use Modules\Media\Helpers\FileHelper;
+
 @endphp
 @if (!empty($title))
 <div class="g-include-exclude">
@@ -59,11 +61,9 @@
                                                      data-bs-parent="#accordion-plan-{{ $planKey }}">
                                                     <div class="accordion-body">
                                                         {{ $step['description'] }}
-                                                        @if (!empty($step['images']))
+                                                        @if (!empty($step['image_url']))
                                                         <div class="step-images">
-                                                            @foreach ($step['images'] as $image)
-                                                            <img src="{{ $image }}" alt="{{ $step['title'] }}">
-                                                            @endforeach
+                                                            <img src="{{ FileHelper::url($step['image_url']) }}" alt="{{ $step['title'] }}" class="place-image">
                                                         </div>
                                                        
                                                         @endif

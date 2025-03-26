@@ -192,7 +192,6 @@
 
                                 <div class="tab-pane" id="tab_steps">
                                 @include('Tour::admin/tour/places-to-visit')
-
                             @include('Tour::admin/tour/plans-steps')
 
                             </div>

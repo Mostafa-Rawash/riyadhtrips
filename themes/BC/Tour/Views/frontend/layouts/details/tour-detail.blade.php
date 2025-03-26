@@ -107,12 +107,14 @@
         </div>
     </div>
 @endif
-@if  ($row->category_id  == 9)
+@if($row->category_id == 9)
 @include('Tour::frontend.layouts.details.tour-places-to-visit')
 @include('Tour::frontend.layouts.details.tour-plans-steps')
+@include('Tour::frontend.layouts.details.tour-package-include-exclude')
+@elseif($row->category_id != 9)
+@include('Tour::frontend.layouts.details.tour-include-exclude')
 @endif
 
-@include('Tour::frontend.layouts.details.tour-include-exclude')
 @include('Tour::frontend.layouts.details.tour-itinerary')
 @include('Tour::frontend.layouts.details.tour-attributes')
 @include('Tour::frontend.layouts.details.tour-faqs')
@@ -136,6 +138,7 @@
 </div>
 @endif
 
+@if  ($row->category_id  == 9)
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -457,3 +460,4 @@ function setupManualAccordions() {
 }
    
 </script>
+@endif

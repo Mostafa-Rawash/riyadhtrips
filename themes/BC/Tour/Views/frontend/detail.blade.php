@@ -18,7 +18,11 @@
                     </div>
                     <div class="col-md-12 col-lg-4">
                         @include('Tour::frontend.layouts.details.vendor')
+                        @if  ($row->category_id  == 9)
+                            @include('Tour::frontend.layouts.details.tour-package-form-book')
+                        @elseif ($row->category_id  != 9)
                         @include('Tour::frontend.layouts.details.tour-form-book')
+                        @endif
                         @include('Tour::frontend.layouts.details.open-hours')
                     </div>
                 </div>

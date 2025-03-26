@@ -2,6 +2,8 @@
  if (!empty($translation->plans)) {
     $title = __("Sample Itinerary");
  }
+ use Modules\Media\Helpers\FileHelper;
+
 ?>
 <?php if(!empty($title)): ?>
 <div class="g-include-exclude">
@@ -61,11 +63,9 @@
                                                     <div class="accordion-body">
                                                         <?php echo e($step['description']); ?>
 
-                                                        <?php if(!empty($step['images'])): ?>
+                                                        <?php if(!empty($step['image_url'])): ?>
                                                         <div class="step-images">
-                                                            <?php $__currentLoopData = $step['images']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $image): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                            <img src="<?php echo e($image); ?>" alt="<?php echo e($step['title']); ?>">
-                                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                            <img src="<?php echo e(FileHelper::url($step['image_url'])); ?>" alt="<?php echo e($step['title']); ?>" class="place-image">
                                                         </div>
                                                        
                                                         <?php endif; ?>
