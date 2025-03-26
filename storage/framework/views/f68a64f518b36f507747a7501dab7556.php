@@ -11,12 +11,12 @@
         <div class="bravo_content">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-12 col-lg-9">
+                    <div class="col-md-12 col-lg-8">
                         <?php $review_score = $row->review_data ?>
                         <?php echo $__env->make('Tour::frontend.layouts.details.tour-detail', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                         <?php echo $__env->make('Tour::frontend.layouts.details.tour-review', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                     </div>
-                    <div class="col-md-12 col-lg-3">
+                    <div class="col-md-12 col-lg-4">
                         <?php echo $__env->make('Tour::frontend.layouts.details.vendor', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                         <?php echo $__env->make('Tour::frontend.layouts.details.tour-form-book', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                         <?php echo $__env->make('Tour::frontend.layouts.details.open-hours', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>

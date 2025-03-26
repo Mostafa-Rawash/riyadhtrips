@@ -114,7 +114,10 @@
         </div>
     </div>
 <?php endif; ?>
+<?php if($row->category_id  == 9): ?>
 <?php echo $__env->make('Tour::frontend.layouts.details.tour-plans-steps', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php endif; ?>
+
 <?php echo $__env->make('Tour::frontend.layouts.details.tour-include-exclude', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php echo $__env->make('Tour::frontend.layouts.details.tour-itinerary', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php echo $__env->make('Tour::frontend.layouts.details.tour-attributes', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
@@ -318,7 +321,7 @@ body {
   position: absolute;
   border-radius: 50%;
   border: 3px solid var(--primary-color);
-  left: -1.6%;
+  left: -1%;
   top: 16px;
   width: 20px;
   height: 20px;

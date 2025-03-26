@@ -125,6 +125,14 @@
                                 <a href="#tab_seo" class="list-group-item list-group-item-action " data-toggle="tab"><?php echo e(__('SEO')); ?></a>
                                 <a href="#tab_steps" class="list-group-item list-group-item-action " data-toggle="tab"><?php echo e(__('Steps')); ?></a>
 
+
+                            <?php
+                            // if ($row->category_id  == 9){
+                            //     printf("<a href='#tab_steps' class='list-group-item list-group-item-action ' data-toggle='tab'>%s</a>", __('Steps') );
+                            // }
+                            ?>
+
+                            
                             </div>
 
                         </div>

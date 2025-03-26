@@ -1,13 +1,6 @@
 @php
 // Initialize default plans structure
 $defaultPlans = [
-    "0" => [
-        "name" => "ssssss",
-        "steps" => [
-            ["title" => "asasa", "description" => "sasas", "image" => null]
-        ]
-    ],
-    "1" => ["name" => "ggggg"]
 ];
 
 // Use existing plans or default

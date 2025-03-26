@@ -1,33 +1,19 @@
 <?php
 // Initialize default plans structure
 $defaultPlans = [
-    [
-        'name' => 'Day 1',
-        'steps' => [
-            ['title' => 'Morning Activity', 'description' => 'Description', 'image' => ''],
-            ['title' => 'Afternoon Activity', 'description' => 'Description', 'image' => '']
-        ]
-    ],
-    [
-        'name' => 'Day 2',
-        'steps' => [
-            ['title' => 'Full Day Activity', 'description' => 'Description', 'image' => '']
-            ]
-        ]
-    ];
+];
 
 // Use existing plans or default
-$plans = [];
-if (!empty($translation->plans)) {
-    if (is_array($translation->plans)) {
-        $plans = $translation->plans;
-    } else {
-        $plans = json_decode($translation->plans, true) ?: json_decode(old('plans', $translation->plans), true);
-    }
+$plans = $translation->plans;
+if (!is_array($translation->plans)) {
+    $plans = json_decode(old('plans', default: $translation->plans), true);
 }
 if (empty($plans)) {
     $plans = $defaultPlans;
     $translation->plans = $defaultPlans;
+}
+if(isset($plans['__plan_number__'])){
+    unset($plans['__plan_number__']);
 }
 ?>
 
@@ -54,8 +40,8 @@ if (empty($plans)) {
                         <input type="text"
                             name="plans[<?php echo e($plan_key); ?>][name]"
                             class="form-control"
-                            value="<?php echo e($plan->name ?? ''); ?>"
-                            placeholder="<?php echo e(__('Enter Plan Name')); ?>">
+                            value="<?php echo e($plan['name'] ?? ''); ?>"
+                            placeholder="<?php echo e($plan['name'] ?? __('Enter Plan Name')); ?>">
                     </div>
                     <div class="col-md-1 text-right">
                         <button type="button" class="btn btn-danger btn-sm btn-remove-plan">
@@ -70,9 +56,10 @@ if (empty($plans)) {
                     
                     <div class="g-items-header bg-light rounded p-2 mb-3">
                         <div class="row">
-                            <div class="col-md-3"><?php echo e(__("Title")); ?></div>
+                            <div class="col-md-2"><?php echo e(__("Day")); ?></div>
+                            <div class="col-md-4"><?php echo e(__("Title")); ?></div>
                             <div class="col-md-4"><?php echo e(__("Description")); ?></div>
-                            <div class="col-md-3"><?php echo e(__("Image")); ?></div>
+                            <div class="col-md-1"><?php echo e(__("Image URL")); ?></div>
                             <div class="col-md-1"><?php echo e(__("Actions")); ?></div>
                         </div>
                     </div>
@@ -83,7 +70,14 @@ if (empty($plans)) {
                         <?php $__currentLoopData = $plan['steps']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $step_key => $step): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <div class="item border-bottom py-2" data-number="<?php echo e($step_key); ?>">
                             <div class="row align-items-center">
-                                <div class="col-md-3">
+                            <div class="col-md-2">
+                                    <input type="text"
+                                        name="plans[<?php echo e($plan_key); ?>][steps][<?php echo e($step_key); ?>][day]"
+                                        class="form-control"
+                                        value="<?php echo e($step['day'] ?? ''); ?>"
+                                        placeholder="<?php echo e(__('Enter day')); ?>">
+                                </div>
+                                <div class="col-md-4">
                                     <input type="text"
                                         name="plans[<?php echo e($plan_key); ?>][steps][<?php echo e($step_key); ?>][title]"
                                         class="form-control"
@@ -96,26 +90,14 @@ if (empty($plans)) {
                                         rows="2"
                                         placeholder="<?php echo e(__('Enter description')); ?>"><?php echo e($step['description'] ?? ''); ?></textarea>
                                 </div>
-                                <div class="col-md-3">
-                                    <div class="input-group">
-                                        <input type="file"
-                                            name="plans[<?php echo e($plan_key); ?>][steps][<?php echo e($step_key); ?>][image]"
-                                            class="form-control step-image-input">
-                                        <?php if(!empty($step['image'])): ?>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">
-                                                <a href="<?php echo e($step['image']); ?>" target="_blank">
-                                                    <i class="fa fa-image"></i>
-                                                </a>
-                                            </span>
-                                        </div>
-                                        <input type="hidden"
-                                            name="plans[<?php echo e($plan_key); ?>][steps][<?php echo e($step_key); ?>][image_current]"
-                                            value="<?php echo e($step['image']); ?>">
-                                        <?php endif; ?>
-                                    </div>
+                                <div class="col-md-1">
+                                    <input type="text"
+                                        name="plans[<?php echo e($plan_key); ?>][steps][<?php echo e($step_key); ?>][image_url]"
+                                        class="form-control"
+                                        value="<?php echo e($step['image_url'] ?? ''); ?>"
+                                        placeholder="<?php echo e(__('Enter image URL')); ?>">
                                 </div>
-                                <div class="col-md-1 text-right">
+                                <div class="col-md-1 text-center">
                                     <button type="button" class="btn btn-danger btn-sm btn-remove-step">
                                         <i class="fa fa-trash"></i>
                                     </button>
@@ -162,10 +144,11 @@ if (empty($plans)) {
                 <div class="steps-wrapper">
                     <div class="g-items-header bg-light rounded p-2 mb-3">
                         <div class="row">
-                            <div class="col-md-3"><?php echo e(__("Title")); ?></div>
-                            <div class="col-md-4"><?php echo e(__("Description")); ?></div>
-                            <div class="col-md-3"><?php echo e(__("Image")); ?></div>
+                            <div class="col-md-4"><?php echo e(__("Title")); ?></div>
+                            <div class="col-md-6"><?php echo e(__("Description")); ?></div>
                             <div class="col-md-1"><?php echo e(__("Actions")); ?></div>
+                            <div class="col-md-1"><?php echo e(__("Day")); ?></div>
+                            <div class="col-md-1"><?php echo e(__("Image URL")); ?></div>
                         </div>
                     </div>
                     <div class="g-items"></div>
@@ -185,60 +168,27 @@ if (empty($plans)) {
     <div class="step-template">
         <div class="item border-bottom py-2" data-number="__step_number__">
             <div class="row align-items-center">
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <input type="text" name="plans[__plan_number__][steps][__step_number__][title]" class="form-control" placeholder="<?php echo e(__('Enter title')); ?>">
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <textarea name="plans[__plan_number__][steps][__step_number__][description]" class="form-control" rows="2" placeholder="<?php echo e(__('Enter description')); ?>"></textarea>
-                </div>
-                <div class="col-md-3">
-                    <input type="file" name="plans[__plan_number__][steps][__step_number__][image]" class="form-control step-image-input">
                 </div>
                 <div class="col-md-1 text-right">
                     <button type="button" class="btn btn-danger btn-sm btn-remove-step">
                         <i class="fa fa-trash"></i>
                     </button>
                 </div>
+                <div class="col-md-1">
+                    <input type="number" name="plans[__plan_number__][steps][__step_number__][day]" class="form-control" placeholder="<?php echo e(__('Enter day')); ?>">
+                </div>
+                <div class="col-md-1">
+                    <input type="text" name="plans[__plan_number__][steps][__step_number__][image_url]" class="form-control" placeholder="<?php echo e(__('Enter image URL')); ?>">
+                </div>
             </div>
         </div>
     </div>
 </div>
-
-<?php $__env->startPush('css'); ?>
-<style>
-    .plans-container {
-        margin-bottom: 30px;
-    }
-
-    .form-control {
-        border: 1px solid #ddd;
-    }
-
-    .card {
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
-    }
-
-    .card-header {
-        border-bottom: 1px solid #eee;
-    }
-
-    .item:last-child {
-        border-bottom: none !important;
-    }
-
-    textarea.form-control {
-        min-height: 45px;
-    }
-
-    .btn-sm {
-        padding: 0.25rem 0.5rem;
-    }
-
-    .step-image-input {
-        height: auto;
-    }
-</style>
-<?php $__env->stopPush(); ?>
 
 <?php $__env->startPush('js'); ?>
 <script>

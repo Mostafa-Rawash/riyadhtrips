@@ -107,7 +107,10 @@
         </div>
     </div>
 @endif
+@if  ($row->category_id  == 9)
 @include('Tour::frontend.layouts.details.tour-plans-steps')
+@endif
+
 @include('Tour::frontend.layouts.details.tour-include-exclude')
 @include('Tour::frontend.layouts.details.tour-itinerary')
 @include('Tour::frontend.layouts.details.tour-attributes')
@@ -236,7 +239,6 @@ body {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  margin: 0 25px;
   padding-left: 0;
 }
 
@@ -310,7 +312,7 @@ body {
   position: absolute;
   border-radius: 50%;
   border: 3px solid var(--primary-color);
-  left: -1.6%;
+  left: -1%;
   top: 16px;
   width: 20px;
   height: 20px;
