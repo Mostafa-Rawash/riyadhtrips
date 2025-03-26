@@ -55,10 +55,10 @@ if(isset($plans['__plan_number__'])){
                     {{-- Steps Header --}}
                     <div class="g-items-header bg-light rounded p-2 mb-3">
                         <div class="row">
-                            <div class="col-md-2">{{__("Day")}}</div>
-                            <div class="col-md-4">{{__("Title")}}</div>
+                            <div class="col-md-1">{{__("Day")}}</div>
+                            <div class="col-md-3">{{__("Title")}}</div>
                             <div class="col-md-4">{{__("Description")}}</div>
-                            <div class="col-md-1">{{__("Image URL")}}</div>
+                            <div class="col-md-3">{{__("Image URL")}}</div>
                             <div class="col-md-1">{{__("Actions")}}</div>
                         </div>
                     </div>
@@ -69,14 +69,14 @@ if(isset($plans['__plan_number__'])){
                         @foreach($plan['steps'] as $step_key => $step)
                         <div class="item border-bottom py-2" data-number="{{$step_key}}">
                             <div class="row align-items-center">
-                            <div class="col-md-2">
+                            <div class="col-md-1">
                                     <input type="text"
                                         name="plans[{{$plan_key}}][steps][{{$step_key}}][day]"
                                         class="form-control"
                                         value="{{$step['day'] ?? ''}}"
                                         placeholder="{{__('Enter day')}}">
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <input type="text"
                                         name="plans[{{$plan_key}}][steps][{{$step_key}}][title]"
                                         class="form-control"
@@ -89,12 +89,8 @@ if(isset($plans['__plan_number__'])){
                                         rows="2"
                                         placeholder="{{__('Enter description')}}">{{$step['description'] ?? ''}}</textarea>
                                 </div>
-                                <div class="col-md-1">
-                                    <input type="text"
-                                        name="plans[{{$plan_key}}][steps][{{$step_key}}][image_url]"
-                                        class="form-control"
-                                        value="{{$step['image_url'] ?? ''}}"
-                                        placeholder="{{__('Enter image URL')}}">
+                                <div class="col-md-3">
+                                    {!! \Modules\Media\Helpers\FileHelper::fieldUpload('plans['.$plan_key.'][steps]['.$step_key.'][image_url]', old('plans['.$plan_key.'][steps]['.$step_key.'][image_url]', $step['image_url'] ?? '')) !!}
                                 </div>
                                 <div class="col-md-1 text-center">
                                     <button type="button" class="btn btn-danger btn-sm btn-remove-step">
@@ -142,11 +138,11 @@ if(isset($plans['__plan_number__'])){
                 <div class="steps-wrapper">
                     <div class="g-items-header bg-light rounded p-2 mb-3">
                         <div class="row">
-                            <div class="col-md-4">{{__("Title")}}</div>
-                            <div class="col-md-6">{{__("Description")}}</div>
-                            <div class="col-md-1">{{__("Actions")}}</div>
                             <div class="col-md-1">{{__("Day")}}</div>
-                            <div class="col-md-1">{{__("Image URL")}}</div>
+                            <div class="col-md-3">{{__("Title")}}</div>
+                            <div class="col-md-4">{{__("Description")}}</div>
+                            <div class="col-md-3">{{__("Image URL")}}</div>
+                            <div class="col-md-1">{{__("Actions")}}</div>
                         </div>
                     </div>
                     <div class="g-items"></div>
@@ -165,22 +161,22 @@ if(isset($plans['__plan_number__'])){
     <div class="step-template">
         <div class="item border-bottom py-2" data-number="__step_number__">
             <div class="row align-items-center">
-                <div class="col-md-4">
+                <div class="col-md-1">
+                    <input type="text" name="plans[__plan_number__][steps][__step_number__][day]" class="form-control" placeholder="{{__('Enter day')}}">
+                </div>
+                <div class="col-md-3">
                     <input type="text" name="plans[__plan_number__][steps][__step_number__][title]" class="form-control" placeholder="{{__('Enter title')}}">
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <textarea name="plans[__plan_number__][steps][__step_number__][description]" class="form-control" rows="2" placeholder="{{__('Enter description')}}"></textarea>
                 </div>
-                <div class="col-md-1 text-right">
+                <div class="col-md-3">
+                    {!! \Modules\Media\Helpers\FileHelper::fieldUpload('plans[__plan_number__][steps][__step_number__][image_url]', old('plans[__plan_number__][steps][__step_number__][image_url]')) !!}
+                </div>
+                <div class="col-md-1 text-center">
                     <button type="button" class="btn btn-danger btn-sm btn-remove-step">
                         <i class="fa fa-trash"></i>
                     </button>
-                </div>
-                <div class="col-md-1">
-                    <input type="number" name="plans[__plan_number__][steps][__step_number__][day]" class="form-control" placeholder="{{__('Enter day')}}">
-                </div>
-                <div class="col-md-1">
-                    <input type="text" name="plans[__plan_number__][steps][__step_number__][image_url]" class="form-control" placeholder="{{__('Enter image URL')}}">
                 </div>
             </div>
         </div>

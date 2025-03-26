@@ -115,6 +115,7 @@
     </div>
 <?php endif; ?>
 <?php if($row->category_id  == 9): ?>
+<?php echo $__env->make('Tour::frontend.layouts.details.tour-places-to-visit', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php echo $__env->make('Tour::frontend.layouts.details.tour-plans-steps', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php endif; ?>
 
@@ -157,10 +158,6 @@
   --border-color: #dee2e6;
   --hover-bg: #f8f9fa;
   --active-bg: rgba(13, 110, 253, 0.05);
-}
-
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 .g-include-exclude {
@@ -225,6 +222,7 @@ body {
   border-right: 0;
   border-radius: 0 !important;
   position: relative;
+  width: 86%;
 }
 
 .accordion-item:first-of-type {
@@ -247,7 +245,6 @@ body {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  margin: 0 25px;
   padding-left: 0;
 }
 

@@ -133,6 +133,8 @@ class Tour extends Bookable
 
         'plans',
 
+        'places',
+
         'surrounding',
 
         'min_day_before_booking',
@@ -174,6 +176,8 @@ class Tour extends Bookable
         'itinerary' => 'array',
 
         'plans' => 'array',
+
+        'places' => 'array',
 
         'service_fee' => 'array',
 
